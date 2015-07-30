@@ -20,6 +20,11 @@
             templateUrl: 'custom-select-enclosure.html'
 
         });
+        formlyConfig.setType({
+            name: 'rangeSlider',
+            templateUrl: 'custom-select-rangeSlider.html'
+
+        });
 
     });
 

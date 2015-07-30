@@ -24,6 +24,9 @@
     "angular-formly-templates-bootstrap": "~5.0.2",
     "angular-material": "~0.10.0",
     "angular-formly-templates-ionic": "~1.0.4",
-    "angular-translate": "~2.7.2"
+    "angular-translate": "~2.7.2",
+    "ionrangeslider": "~2.0.13",
+    "nouislider": "~8.0.2",
+    "jquery-ui": "~1.11.4"
   }
 }

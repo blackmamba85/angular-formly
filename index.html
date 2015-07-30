@@ -11,7 +11,6 @@
 <body ng-app="formlyApp" ng-controller="MainController as vm">
     <div class="container col-md-4 col-md-offset-4">
         <form novalidate>
-            <h1 style="color: #0080FF">Enclosure</h1>
             <formly-form fields="vm.enclosureFields" form="vm.enclosureForm" model="vm.model">
             </formly-form>
         </form>
@@ -29,12 +28,11 @@
             <br>
             <br>
             <br>
+            <h1 style="color: #0080FF">Enclosure</h1>
         </div>
     </script>
     <script type="text/ng-template" id="custom-select-enclosure.html">
         <div>
-            <br>
-            <br>
             <br>
             <br>
             <select ng-model="model[options.key]" ng-options="option.articlenumber as option.description + '  ' + option.nominalwidth group by option.group for option in options.templateOptions.options">
@@ -45,6 +43,24 @@
             <br>
         </div>
     </script>
+    <script type="text/ng-template" id="custom-select-rangeSlider.html">
+        <div>
+            <div id="slider-range" ng-model="model[options.key]"></div>
+        </div>
+        
+        <script>
+        $(function() {
+            $("#slider-range").slider({
+                range: true,
+                min: 0,
+                max: 2000,
+                values: [75, 300],
+
+            });
+
+        });
+        </script>
+    </script>
 </body>
 <!-- Application Dependencies -->
 <script src="bower_components/api-check/dist/api-check.js"></script>
@@ -52,6 +68,8 @@
 <script src="bower_components/angular-translate/angular-translate.js"></script>
 <script src="bower_components/angular-formly/dist/formly.js"></script>
 <script src="bower_components/angular-formly-templates-bootstrap/dist/angular-formly-templates-bootstrap.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
 <!-- Firebase -->
 <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
 <!-- AngularFire -->

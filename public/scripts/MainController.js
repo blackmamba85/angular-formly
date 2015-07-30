@@ -1965,16 +1965,8 @@
                 }
             }, {
                 key: 'width',
-                type: 'range',
-                templateOptions: {
-                    label: 'Width',
-                    rangeClass: 'calm',
-                    min: '0',
-                    max: '2000',
-                    step: '5',
-                    value: '25'
-
-                }
+                type: 'rangeSlider'
+              
             }, {
                 key: 'enclosure',
                 type: 'selectEnclosure',
