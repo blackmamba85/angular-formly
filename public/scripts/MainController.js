@@ -14,126 +14,7 @@
 
         vm.data = {};
 
-
-
-        var ref = new Firebase("https://eec.firebaseio.com/");
-        ref.authAnonymously(function(error, authData) {
-            if (error) {
-                console.log("Login Failed!", error);
-            } else {
-                console.log("Authenticated successfully with payload:", authData);
-            }
-        });
-
-        // download the data into a local object
-        vm.data = $firebaseObject(ref);
-
-
-        //this waits for the data to load and then logs the output. 
-        vm.data.$loaded()
-            .then(function() {
-                //$scope.data = vm.data;
-
-                loadForm(vm.data);
-
-
-                console.log('enclosure', vm.data.enclosures);
-                console.log('colors', vm.data.colors);
-
-            })
-            .catch(function(err) {
-                console.error(err);
-            });
-
-
-
-
-        function loadForm(data) {
-
-            vm.enclosureFields = [{
-                key: 'language',
-                type: 'select',
-                templateOptions: {
-                    type: 'select',
-                    label: $translate.instant('LANGUAGE'),
-                    options: [{
-                        "name": $translate.instant('ENGLISH'),
-                        "value": "en"
-                    }, {
-                        "name": $translate.instant('DEUTSCH'),
-                        "value": "de"
-                    }, ],
-                    onselect: function(value) {
-                        $translate.use(value);
-                    }
-                }
-            }];
-
-            /*vm.enclosureFields = [{
-                key: 'language',
-                type: 'select',
-                templateOptions: {
-                    type: 'select',
-                    label: 'Language:',
-                    placeholder: 'Please Select',
-                    options: [{
-                        "name": "English",
-                        "value": "en"
-                    }, {
-                        "name": "Deutsch",
-                        "value": "de"
-                    }, ]
-                }
-            }, {
-                key: 'width',
-                type: 'range',
-                templateOptions: {
-                    label: 'Width',
-                    rangeClass: 'calm',
-                    min: '0',
-                    max: '2000',
-                    step: '5',
-                    value: '25',
-                    minIcon: 'ion-volume-low',
-                    maxIcon: 'ion-volume-high'
-                }
-            }, {
-                key: 'enclosure',
-                type: 'select',
-                templateOptions: {
-                    label: 'Enclosure:',
-                    options: vm.data.enclosures,
-                    valueProp: 'assembly',
-                    labelProp: 'description'
-
-                }
-            }, {
-                key: 'color',
-                type: 'select',
-                templateOptions: {
-                    label: 'Colors:',
-                    options: [{
-                        "name": "Yellow",
-                        "value": "789"
-                    }, {
-                        "name": "Green",
-                        "value": "1234"
-                    }, {
-                        "name": "Red",
-                        "value": "5678"
-                    }, ]
-
-                }
-
-            }, ];*/
-
-
-        }
-
-
-
-
-        /*var data = {
+        var data = {
             "colors": {
                 "789": "yellow",
                 "1234": "green",
@@ -2000,7 +1881,136 @@
                     "yellow": "Yellow"
                 }
             }
-        };*/
+        };
+
+        console.log('enclosure', data.enclosures);
+        console.log('colors', data.colors);
+
+
+        loadForm(data);
+
+
+
+
+        // var ref = new Firebase("https://eec.firebaseio.com/");
+        // ref.authAnonymously(function(error, authData) {
+        //     if (error) {
+        //         console.log("Login Failed!", error);
+        //     } else {
+        //         console.log("Authenticated successfully with payload:", authData);
+        //     }
+        // });
+
+        // // download the data into a local object
+        // vm.data = $firebaseObject(ref);
+
+
+
+        // //this waits for the data to load and then logs the output. 
+        // vm.data.$loaded()
+        //     .then(function() {
+
+        //         console.log('Data from firebase:');
+        //         console.log('enclosure', vm.data.enclosures);
+        //         console.log('colors', vm.data.colors);
+
+        //         loadForm(vm.data);
+
+        //     })
+        //     .catch(function(err) {
+        //         console.error(err);
+        //     });
+
+
+
+
+        function loadForm(data) {
+
+            // vm.enclosureFields = [{
+            //     key: 'language',
+            //     type: 'selectLanguage',
+            //     templateOptions: {
+            //         type: 'selectLanguage',
+            //         label: $translate.instant('LANGUAGE'),
+            //         options: [{
+            //             "name": $translate.instant('ENGLISH'),
+            //             "value": "en"
+            //         }, {
+            //             "name": $translate.instant('DEUTSCH'),
+            //             "value": "de"
+            //         }, ],
+            //         onselect: function(value) {
+            //             $translate.use(value);
+            //         }
+            //     }
+            // }];
+
+            vm.enclosureFields = [{
+                key: 'language',
+                type: 'selectLanguage',
+                templateOptions: {
+                    type: 'select',
+                    label: $translate.instant('LANGUAGE'),
+                    placeholder: 'Please Select',
+                    options: [{
+                        "name": $translate.instant('ENGLISH'),
+                        "value": "en"
+                    }, {
+                        "name": $translate.instant('DEUTSCH'),
+                        "value": "de"
+                    }, ],
+                    onChange: function(value) {
+                        $translate.use(value);
+                    }
+                }
+            }, {
+                key: 'width',
+                type: 'range',
+                templateOptions: {
+                    label: 'Width',
+                    rangeClass: 'calm',
+                    min: '0',
+                    max: '2000',
+                    step: '5',
+                    value: '25'
+
+                }
+            }, {
+                key: 'enclosure',
+                type: 'selectEnclosure',
+                templateOptions: {
+                    type: 'selectEnclosure',
+                    label: 'Enclosure:',
+                    options: data.enclosures
+                    
+
+                }
+            }, {
+                key: 'color',
+                type: 'select',
+                templateOptions: {
+                    label: 'Colors:',
+                    options: [{
+                        "name": "Yellow",
+                        "value": "789"
+                    }, {
+                        "name": "Green",
+                        "value": "1234"
+                    }, {
+                        "name": "Red",
+                        "value": "5678"
+                    }, ]
+
+                }
+
+            }, ];
+
+
+        }
+
+
+
+
 
 
 

@@ -4,13 +4,20 @@
 
     'use strict';
 
-
-    var app = angular.module('formlyApp', ['pascalprecht.translate', 'formly', 'formlyBootstrap', 'firebase', 'formlyIonic']);
+    var app = angular.module('formlyApp', ['formly', 'formlyBootstrap', 'firebase', 'formlyIonic', 'pascalprecht.translate']);
+    //var app = angular.module('formlyApp', ['pascalprecht.translate', 'formly', 'formlyBootstrap', 'firebase', 'formlyIonic']);
+    //var app = angular.module('formlyApp', ['pascalprecht.translate', 'formly', 'firebase']);
 
     app.run(function(formlyConfig) {
         formlyConfig.setType({
-            name: 'select',
-            templateUrl: 'custom-select.html'        
+            name: 'selectLanguage',
+            templateUrl: 'custom-select-language.html'
+
+
+        });
+        formlyConfig.setType({
+            name: 'selectEnclosure',
+            templateUrl: 'custom-select-enclosure.html'
 
         });
 
@@ -18,7 +25,7 @@
 
     app.config(function($translateProvider) {
         $translateProvider.translations('en', {
-             'WIDTH': 'Width',
+            'WIDTH': 'Width',
             'ENCLOSURE': 'Enclosure',
             'COLOR': 'Color',
             'LANGUAGE': 'Language',
