@@ -23,6 +23,7 @@
     "angular-formly": "~6.20.1",
     "angular-formly-templates-bootstrap": "~5.0.2",
     "angular-material": "~0.10.0",
-    "angular-formly-templates-ionic": "~1.0.4"
+    "angular-formly-templates-ionic": "~1.0.4",
+    "angular-translate": "~2.7.2"
   }
 }

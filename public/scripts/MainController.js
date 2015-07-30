@@ -1,13 +1,12 @@
 // scripts/MainController.js
 
-
 (function() {
 
     'use strict';
 
     angular.module('formlyApp').
-    controller('MainController', function($firebaseObject) {
-     
+    controller('MainController', function($translate, $firebaseObject) {
+
         var vm = this;
 
         vm.enclosure = {};
@@ -15,7 +14,7 @@
 
         vm.data = {};
 
-       
+
 
         var ref = new Firebase("https://eec.firebaseio.com/");
         ref.authAnonymously(function(error, authData) {
@@ -50,7 +49,27 @@
 
 
         function loadForm(data) {
+
             vm.enclosureFields = [{
+                key: 'language',
+                type: 'select',
+                templateOptions: {
+                    type: 'select',
+                    label: $translate.instant('LANGUAGE'),
+                    options: [{
+                        "name": $translate.instant('ENGLISH'),
+                        "value": "en"
+                    }, {
+                        "name": $translate.instant('DEUTSCH'),
+                        "value": "de"
+                    }, ],
+                    onselect: function(value) {
+                        $translate.use(value);
+                    }
+                }
+            }];
+
+            /*vm.enclosureFields = [{
                 key: 'language',
                 type: 'select',
                 templateOptions: {
@@ -106,7 +125,7 @@
 
                 }
 
-            }, ];
+            }, ];*/
 
 
         }
