@@ -5,16 +5,24 @@
     'use strict';
 
     angular.module('formlyApp').
-    controller('MainController', function($translate, $firebaseObject) {
+    controller('MainController', ['$scope', '$translate', '$firebaseObject', function($scope, $translate, $firebaseObject) {
 
         var vm = this;
 
         vm.enclosure = {};
+
+
+        vm.model = {};
         vm.options = {};
 
         vm.data = {};
 
-        var data = {
+
+
+
+        /*  Use this JSON data if Firebase not responding
+         */
+        /*     var data = {
             "colors": {
                 "789": "yellow",
                 "1234": "green",
@@ -1881,77 +1889,58 @@
                     "yellow": "Yellow"
                 }
             }
-        };
-
-        console.log('enclosure', data.enclosures);
-        console.log('colors', data.colors);
+        };*/
 
 
-        loadForm(data);
+        /*      loadForm(data);
+         */
 
 
 
+        /*     Comment this out if Firebase not responding
+         */
+        var ref = new Firebase("https://eec.firebaseio.com/");
+        ref.authAnonymously(function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+            } else {
+                console.log("Authenticated successfully with payload:", authData);
+            }
+        });
 
-        // var ref = new Firebase("https://eec.firebaseio.com/");
-        // ref.authAnonymously(function(error, authData) {
-        //     if (error) {
-        //         console.log("Login Failed!", error);
-        //     } else {
-        //         console.log("Authenticated successfully with payload:", authData);
-        //     }
-        // });
-
-        // // download the data into a local object
-        // vm.data = $firebaseObject(ref);
+        // download the data into a local object
+        vm.data = $firebaseObject(ref);
 
 
 
-        // //this waits for the data to load and then logs the output. 
-        // vm.data.$loaded()
-        //     .then(function() {
+        //this waits for the data to load and then logs the output. 
+        vm.data.$loaded()
+            .then(function() {
 
-        //         console.log('Data from firebase:');
-        //         console.log('enclosure', vm.data.enclosures);
-        //         console.log('colors', vm.data.colors);
+                console.log('colores', vm.data.colors);
 
-        //         loadForm(vm.data);
 
-        //     })
-        //     .catch(function(err) {
-        //         console.error(err);
-        //     });
+                loadForm(vm.data);
+
+            })
+            .catch(function(err) {
+                console.error(err);
+            });
+
+        /* up until here
+         */
 
 
 
 
         function loadForm(data) {
 
-            // vm.enclosureFields = [{
-            //     key: 'language',
-            //     type: 'selectLanguage',
-            //     templateOptions: {
-            //         type: 'selectLanguage',
-            //         label: $translate.instant('LANGUAGE'),
-            //         options: [{
-            //             "name": $translate.instant('ENGLISH'),
-            //             "value": "en"
-            //         }, {
-            //             "name": $translate.instant('DEUTSCH'),
-            //             "value": "de"
-            //         }, ],
-            //         onselect: function(value) {
-            //             $translate.use(value);
-            //         }
-            //     }
-            // }];
-
             vm.enclosureFields = [{
                 key: 'language',
                 type: 'selectLanguage',
                 templateOptions: {
-                    type: 'select',
+                    type: 'selectLanguage',
                     label: $translate.instant('LANGUAGE'),
-                    placeholder: 'Please Select',
                     options: [{
                         "name": $translate.instant('ENGLISH'),
                         "value": "en"
@@ -1959,43 +1948,54 @@
                         "name": $translate.instant('DEUTSCH'),
                         "value": "de"
                     }, ],
-                    onChange: function(value) {
-                        $translate.use(value);
-                    }
-                }
+                    onChange: function($viewValue, $modelValue, scope) {
+                        $translate($viewValue);
+                        console.log($viewValue);
+                    },
+
+
+                },
+
             }, {
                 key: 'width',
-                type: 'rangeSlider'
-              
+                type: 'rangeSlider',
+                templateOptions: {
+                    label: $translate.instant('WIDTH')
+                }
             }, {
                 key: 'enclosure',
                 type: 'selectEnclosure',
                 templateOptions: {
                     type: 'selectEnclosure',
-                    label: 'Enclosure:',
-                    options: data.enclosures
-                    
+                    label: $translate.instant('ENCLOSURE'),
+                    options: data.enclosures,
+                },
 
-                }
+
             }, {
-                key: 'color',
+                key: 'colors',
                 type: 'select',
                 templateOptions: {
-                    label: 'Colors:',
+                    label: $translate.instant('COLOR'),
                     options: [{
-                        "name": "Yellow",
+                        "name": $translate.instant('YELLOW'),
                         "value": "789"
                     }, {
-                        "name": "Green",
+                        "name": $translate.instant('GREEN'),
                         "value": "1234"
                     }, {
-                        "name": "Red",
+                        "name": $translate.instant('RED'),
                         "value": "5678"
                     }, ]
-
                 }
-
             }, ];
+
+
+
+
+
+
+
 
 
         }
@@ -2009,6 +2009,25 @@
 
 
 
+        /*{
+                       key: 'color',
+                       type: 'select',
+                       templateOptions: {
+                           label: 'Colors:',
+                           options: [{
+                               "name": "Yellow",
+                               "value": "789"
+                           }, {
+                               "name": "Green",
+                               "value": "1234"
+                           }, {
+                               "name": "Red",
+                               "value": "5678"
+                           }, ]
+
+                       }
+
+                   },*/
 
 
 
@@ -2017,6 +2036,6 @@
 
 
 
-    });
+    }]);
 
 })();

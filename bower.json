@@ -27,6 +27,7 @@
     "angular-translate": "~2.7.2",
     "ionrangeslider": "~2.0.13",
     "nouislider": "~8.0.2",
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "angular-awesome-slider": "~2.4.0"
   }
 }

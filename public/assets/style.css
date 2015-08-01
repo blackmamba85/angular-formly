@@ -2,16 +2,20 @@
 
 .container {
     background-color: #f2f2f2;
-    border: 1px solid #ccc;
-    padding: 20px;
+    border: 2px solid #ccc;
+    padding: 40px;
     top: 20px;
+    width: 50%;
     -webkit-box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
-    box-shadow: 0 2px 2px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 3px 2px 1px rgba(0,0,0,0.2);
 }
 
 .selectLanguage {
 	float: right;
-	margin-bottom-bottom: 40px;
+	margin-bottom: 50px;
+}
 
 
+.fields{
+	margin-bottom: 30px;
 }
