@@ -1933,10 +1933,20 @@
 
 
 
+
         function loadForm(data) {
+
+            vm.options = {
+                formState: {
+                    lang: 'en'
+                }
+            };
+
+
 
             vm.enclosureFields = [{
                 key: 'language',
+                model: vm.options.formState,
                 type: 'selectLanguage',
                 templateOptions: {
                     type: 'selectLanguage',
@@ -1948,19 +1958,25 @@
                         "name": $translate.instant('DEUTSCH'),
                         "value": "de"
                     }, ],
-                    onChange: function($viewValue, $modelValue, scope) {
-                        $translate($viewValue);
-                        console.log($viewValue);
-                    },
-
-
+                    onChange: function(val) {
+                        $translate.use(val)
+                    }
                 },
+                expressionProperties: {
+                    'templateOptions.label': '"LANGUAGE" | translate',
+                    'templateOptions.options[0].name': '"ENGLISH" | translate',
+                    'templateOptions.options[1].name': '"DEUTSCH" | translate'
+                }
+
 
             }, {
                 key: 'width',
                 type: 'rangeSlider',
                 templateOptions: {
                     label: $translate.instant('WIDTH')
+                },
+                expressionProperties: {
+                    'templateOptions.label': '"WIDTH" | translate'
                 }
             }, {
                 key: 'enclosure',
@@ -1970,8 +1986,9 @@
                     label: $translate.instant('ENCLOSURE'),
                     options: data.enclosures,
                 },
-
-
+                expressionProperties: {
+                    'templateOptions.label': '"ENCLOSURE" | translate'
+                }
             }, {
                 key: 'colors',
                 type: 'select',
@@ -1987,8 +2004,20 @@
                         "name": $translate.instant('RED'),
                         "value": "5678"
                     }, ]
+                },
+                expressionProperties: {
+                    'templateOptions.label': '"COLOR" | translate',
+                    'templateOptions.options[0].name': '"YELLOW" | translate',
+                    'templateOptions.options[1].name': '"GREEN" | translate',
+                    'templateOptions.options[2].name': '"RED" | translate'
+
                 }
+
             }, ];
+
+
+
+
 
 
 
@@ -2002,32 +2031,6 @@
 
 
 
-
-
-
-
-
-
-
-        /*{
-                       key: 'color',
-                       type: 'select',
-                       templateOptions: {
-                           label: 'Colors:',
-                           options: [{
-                               "name": "Yellow",
-                               "value": "789"
-                           }, {
-                               "name": "Green",
-                               "value": "1234"
-                           }, {
-                               "name": "Red",
-                               "value": "5678"
-                           }, ]
-
-                       }
-
-                   },*/
 
 
 
