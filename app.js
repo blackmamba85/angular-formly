@@ -10,11 +10,11 @@
         'formlyIonic',
         'pascalprecht.translate',
         'angularAwesomeSlider',
-        'ngSanitize'
-    ]);
-    //var app = angular.module('formlyApp', ['pascalprecht.translate', 'formly', 'formlyBootstrap', 'firebase', 'formlyIonic']);
-    //var app = angular.module('formlyApp', ['pascalprecht.translate', 'formly', 'firebase']);
+        'ngSanitize',
+        'angularSpinner'
+    ]);   
 
+    //Custom templates configurationsS
     app.run(function(formlyConfig) {
         formlyConfig.setType({
             name: 'selectLanguage',
@@ -85,6 +85,11 @@
     app.config(function(formlyConfigProvider) {
         formlyConfigProvider.disableWarnings = true;
     });
+
+
+    app.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
+    usSpinnerConfigProvider.setDefaults({color: '#0080FF'});
+}]);
 
 
 

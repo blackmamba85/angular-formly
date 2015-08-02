@@ -10,14 +10,20 @@
 </head>
 
 <body ng-app="formlyApp" ng-controller="MainController as vm">
+
+   
     <div class="container col-md-4 col-md-offset-4">
+    
         <form novalidate>
+             <span us-spinner spinner-key="spinner-1" spinner-start-active="true"></span>
+
             <h1 style="color: #0080FF">Enclosure</h1>
             <formly-form fields="vm.enclosureFields" form="vm.enclosureForm" model="vm.model" options="vm.options">
             </formly-form>
+
         </form>
     </div>
-
+     
 
 
     <!-- my custom templates here -->
@@ -30,7 +36,7 @@
             </select>
 
         </div>
-        
+
         <br>
         <br>
     </script>
@@ -76,6 +82,10 @@
 <!-- AngularFire -->
 <script src="https://cdn.firebase.com/libs/angularfire/1.1.2/angularfire.min.js"></script>
 <script src="bower_components/angular-formly-templates-ionic/dist/angular-formly-templates-ionic.js"></script>
+<!-- Spinner -->
+<script src="bower_components/spin.js/spin.js"></script>
+<script src="bower_components/angular-spinner/angular-spinner.js"></script>
+<!-- Slider Range -->
 <script type="text/javascript" src="public/lib/angular-awesome-slider/dist/angular-awesome-slider.min.js"></script>
 <script src="https://code.angularjs.org/1.4.3/angular-sanitize.js"></script>
 <!-- Application Scripts -->

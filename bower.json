@@ -28,6 +28,8 @@
     "ionrangeslider": "~2.0.13",
     "nouislider": "~8.0.2",
     "jquery-ui": "~1.11.4",
-    "angular-awesome-slider": "~2.4.0"
+    "angular-awesome-slider": "~2.4.0",
+    "angular-spin-js": "~0.3.4",
+    "angular-spinner": "~0.6.2"
   }
 }
