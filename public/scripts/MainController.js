@@ -10,9 +10,6 @@
 
             var vm = this;
 
-            vm.enclosure = {};
-
-
             vm.model = {};
             vm.options = {};
 
@@ -22,9 +19,9 @@
 
             vm.data = {};
 
-           
-            /*  Use this JSON data if Firebase not responding
-             */
+
+            ////*  Use this JSON data if Firebase not responding
+
 
             /*     var data = {
                 "colors": {
@@ -1920,13 +1917,8 @@
             //this waits for the data to load and then logs the output. 
             vm.data.$loaded()
                 .then(function() {
-
-                    $scope.formData = vm.data;
                     usSpinnerService.stop('spinner-1');
-
-
                     loadForm(vm.data);
-
                 })
                 .catch(function(err) {
                     console.error(err);
@@ -1935,26 +1927,20 @@
             /* up until here
              */
 
-
-
-
-
             function loadForm(data) {
-
+                //how fields can communicate with one another
                 vm.options = {
                     formState: {
-                        language: 'en'
+                        language: 'en'                        
                     }
                 };
 
-
-
+                console.log(vm.options.formState);
                 vm.enclosureFields = [{
                     key: 'language',
                     model: vm.options.formState,
                     type: 'selectLanguage',
                     templateOptions: {
-                        type: 'selectLanguage',
                         label: $translate.instant('LANGUAGE'),
                         options: [{
                             "name": $translate.instant('ENGLISH'),
@@ -1964,7 +1950,8 @@
                             "value": "de"
                         }, ],
                         onChange: function(val) {
-                            $translate.use(val)
+                            $translate.use(val);
+                            console.log(vm.options.formState);
                         }
                     },
                     expressionProperties: {
@@ -1973,6 +1960,9 @@
                         'templateOptions.options[1].name': '"DEUTSCH" | translate'
                     }
 
+
+                }, {
+                    template: '<h1 style="color: #0080FF">Enclosure</h1>'
 
                 }, {
                     key: 'width',
@@ -2019,16 +2009,6 @@
                     }
 
                 }, ];
-
-
-
-
-
-
-
-
-
-
 
 
 

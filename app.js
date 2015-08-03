@@ -5,7 +5,7 @@
     'use strict';
 
     var app = angular.module('formlyApp', ['formly',
-        'formlyBootstrap',
+        
         'firebase',
         'formlyIonic',
         'pascalprecht.translate',
@@ -78,7 +78,7 @@
             'GREEN': 'Grun',
             'YELLOW': 'Gelb'
         });
-        $translateProvider.preferredLanguage('de');
+        $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }]);
 
