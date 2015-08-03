@@ -1950,10 +1950,10 @@
                             "value": "de"
                         }, ],
                         onChange: function(val) {
-                            $translate.use(val);
-                            console.log(vm.options.formState);
+                            $translate.use(val);                            
                         }
                     },
+                    //adds dynamic interaction to form, use for hiding fields based on other fields
                     expressionProperties: {
                         'templateOptions.label': '"LANGUAGE" | translate',
                         'templateOptions.options[0].name': '"ENGLISH" | translate',
@@ -1980,13 +1980,14 @@
                         type: 'selectEnclosure',
                         label: $translate.instant('ENCLOSURE'),
                         options: data.enclosures,
+                        
                     },
                     expressionProperties: {
                         'templateOptions.label': '"ENCLOSURE" | translate'
                     }
                 }, {
                     key: 'colors',
-                    type: 'select',
+                    type: 'selectColors',
                     templateOptions: {
                         label: $translate.instant('COLOR'),
                         options: [{

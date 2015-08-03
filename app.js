@@ -5,14 +5,14 @@
     'use strict';
 
     var app = angular.module('formlyApp', ['formly',
-        
+
         'firebase',
         'formlyIonic',
         'pascalprecht.translate',
         'angularAwesomeSlider',
         'ngSanitize',
-        'angularSpinner'
-    ]);   
+        'angularSpinner',
+    ]);
 
     //Custom templates configurationsS
     app.run(function(formlyConfig) {
@@ -43,7 +43,7 @@
                     to: 2000,
                     floor: true,
                     step: 1,
-                    skin: 'plastic',                    
+                    skin: 'plastic',
                     vertical: false,
                 };
             },
@@ -58,7 +58,7 @@
     app.config(['$translateProvider', function($translateProvider) {
         $translateProvider.translations('en', {
             'WIDTH': 'Width:',
-            'ENCLOSURE': 'Enclosure',
+            'ENCLOSURE': 'Enclosure:',
             'COLOR': 'Color:',
             'LANGUAGE': 'Language:',
             'ENGLISH': 'English',
@@ -87,9 +87,11 @@
     });
 
 
-    app.config(['usSpinnerConfigProvider', function (usSpinnerConfigProvider) {
-    usSpinnerConfigProvider.setDefaults({color: '#0080FF'});
-}]);
+    app.config(['usSpinnerConfigProvider', function(usSpinnerConfigProvider) {
+        usSpinnerConfigProvider.setDefaults({
+            color: '#0080FF'
+        });
+    }]);
 
 
 
