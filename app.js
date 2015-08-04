@@ -21,7 +21,6 @@
         formlyConfig.setType({
             name: 'selectEnclosure',
             templateUrl: 'custom-select-enclosure.html'
-
         });
         formlyConfig.setType({
             name: 'selectColors',
@@ -32,6 +31,7 @@
             templateUrl: 'custom-select-rangeSlider.html',
             link: function(scope, el, attrs) {},
             controller: function($scope) {
+                //angular-awesome-slider
                 $scope.disable = function() {
                     $scope.disabled = !$scope.disabled;
                 };
@@ -80,10 +80,7 @@
         $translateProvider.useSanitizeValueStrategy('sanitize');
     }]);
 
-    app.config(function(formlyConfigProvider) {
-        formlyConfigProvider.disableWarnings = true;
-    });
-
+   
 
     app.config(['usSpinnerConfigProvider', function(usSpinnerConfigProvider) {
         usSpinnerConfigProvider.setDefaults({

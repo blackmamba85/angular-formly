@@ -24,19 +24,18 @@
             <label>
                 {{options.templateOptions.label}}
             </label>
-            <select class="form-control" ng-model="model[options.key]" ng-options="option.value as option.name group by option.group for option in options.templateOptions.options">
-                <pre ng-repeat="(key, val) in this">$scope.{{key}} = {{ val | json }}</pre>
+            <select class="form-control" ng-model="model[options.key]" ng-options="option.value as option.name group by option.group for option in options.templateOptions.options">               
             </select>
         </div>
         <br>
-        <br>
+        <br>        
     </script>
     <script type="text/ng-template" id="custom-select-enclosure.html">
         <div class="form-inline" id="fields">
             <label for="{{id}}">
                 {{options.templateOptions.label}}
             </label>
-            <select class="form-control" ng-model="model[options.key]" ng-options="option.articlenumber as option.description + '  ' + option.nominalwidth | filter:formState.width group by option.group for option in options.templateOptions.options  | filter: 300 " class="formControl">
+            <select class="form-control" ng-model="model[options.key]" ng-options="option.articlenumber as option.description + '  ' + option.nominalwidth group by option.group for option in options.templateOptions.options">
             </select>
         </div>
     </script>

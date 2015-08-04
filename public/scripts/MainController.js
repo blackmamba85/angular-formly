@@ -64,10 +64,8 @@
                         'templateOptions.options[1].name': '"DEUTSCH" | translate'
                     }
 
-
                 }, {
-                    template: '<h1 style="color: #0080FF">Enclosure</h1></br>'
-
+                    template: '<h1 style="color: #0080FF">Enclosure</h1></br>',
                 }, {
                     key: 'width',
                     type: 'rangeSlider',
@@ -77,11 +75,11 @@
                     expressionProperties: {
                         'templateOptions.label': '"WIDTH" | translate'
                     }
-                }, {
+
+                },{
                     key: 'enclosure',
                     type: 'selectEnclosure',
-                    templateOptions: {
-                        type: 'selectEnclosure',
+                    templateOptions: {                        
                         label: $translate.instant('ENCLOSURE'),
                         options: data.enclosures,
                     },
