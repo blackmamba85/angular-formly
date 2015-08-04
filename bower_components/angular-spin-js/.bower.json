@@ -1,0 +1,24 @@
+{
+  "name": "angular-spin-js",
+  "version": "0.3.4",
+  "dependencies": {
+    "angular": "*",
+    "angular-sanitize": "*",
+    "angular-animate": "*",
+    "underscore": "*",
+    "angular-mocks": "*",
+    "angular-cookies": "*",
+    "spin.js": "*"
+  },
+  "homepage": "https://github.com/guidoprincess/angular-spin-js",
+  "_release": "0.3.4",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.3.4",
+    "commit": "c96d6db2a30060e17d83f0ac21709af97237c1ee"
+  },
+  "_source": "git://github.com/guidoprincess/angular-spin-js.git",
+  "_target": "~0.3.4",
+  "_originalSource": "angular-spin-js",
+  "_direct": true
+}

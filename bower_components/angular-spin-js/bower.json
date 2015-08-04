@@ -1,0 +1,13 @@
+{
+  "name": "angular-spin-js",
+  "version": "0.3.4",
+  "dependencies": {
+    "angular": "*",    
+    "angular-sanitize": "*",
+    "angular-animate": "*",    
+    "underscore": "*",    
+    "angular-mocks": "*",
+    "angular-cookies": "*",
+    "spin.js": "*"
+  }
+}
