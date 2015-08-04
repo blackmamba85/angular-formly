@@ -1,5 +1,3 @@
-// scripts/MainController.js
-
 (function() {
 
     'use strict';
@@ -11,19 +9,115 @@
             var vm = this;
 
             vm.model = {};
-            vm.options = {};
 
             $scope.formData = {};
-
-            console.log($scope.formData);
 
             vm.data = {};
 
 
-            ////*  Use this JSON data if Firebase not responding
+            var ref = new Firebase("https://eec.firebaseio.com/");
+            ref.authAnonymously(function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                }
+            });
+
+            // download the data into a local object
+            vm.data = $firebaseObject(ref);
+
+            //this waits for the data to load and then logs the output. 
+            vm.data.$loaded()
+                .then(function() {
+                    usSpinnerService.stop('spinner-1');
+                    loadForm(vm.data);
+                })
+                .catch(function(err) {
+                    console.error(err);
+                });
 
 
-            /*     var data = {
+            function loadForm(data) {
+
+                vm.enclosureFields = [{
+                    key: 'language',
+                    type: 'selectLanguage',
+                    templateOptions: {
+                        label: $translate.instant('LANGUAGE'),
+                        options: [{
+                            "name": $translate.instant('ENGLISH'),
+                            "value": "en"
+                        }, {
+                            "name": $translate.instant('DEUTSCH'),
+                            "value": "de"
+                        }, ],
+                        onChange: function(val) {
+                            $translate.use(val);
+                            console.log(vm.model.language);
+                        }
+                    },
+                    //adds dynamic interaction to form, use for hiding fields based on other fields
+                    expressionProperties: {
+                        'templateOptions.label': '"LANGUAGE" | translate',
+                        'templateOptions.options[0].name': '"ENGLISH" | translate',
+                        'templateOptions.options[1].name': '"DEUTSCH" | translate'
+                    }
+
+
+                }, {
+                    template: '<h1 style="color: #0080FF">Enclosure</h1></br>'
+
+                }, {
+                    key: 'width',
+                    type: 'rangeSlider',
+                    templateOptions: {
+                        label: $translate.instant('WIDTH')
+                    },
+                    expressionProperties: {
+                        'templateOptions.label': '"WIDTH" | translate'
+                    }
+                }, {
+                    key: 'enclosure',
+                    type: 'selectEnclosure',
+                    templateOptions: {
+                        type: 'selectEnclosure',
+                        label: $translate.instant('ENCLOSURE'),
+                        options: data.enclosures,
+                    },
+                    expressionProperties: {
+                        'templateOptions.label': '"ENCLOSURE" | translate'
+                    }
+                }, {
+                    key: 'colors',
+                    type: 'selectColors',
+                    templateOptions: {
+                        label: $translate.instant('COLOR'),
+                        options: [{
+                            "name": $translate.instant('YELLOW'),
+                            "value": "789"
+                        }, {
+                            "name": $translate.instant('GREEN'),
+                            "value": "1234"
+                        }, {
+                            "name": $translate.instant('RED'),
+                            "value": "5678"
+                        }, ]
+                    },
+                    expressionProperties: {
+                        'templateOptions.label': '"COLOR" | translate',
+                        'templateOptions.options[0].name': '"YELLOW" | translate',
+                        'templateOptions.options[1].name': '"GREEN" | translate',
+                        'templateOptions.options[2].name': '"RED" | translate'
+
+                    }
+
+                }, ];
+            }
+
+
+
+            var data = {
                 "colors": {
                     "789": "yellow",
                     "1234": "green",
@@ -1890,130 +1984,15 @@
                         "yellow": "Yellow"
                     }
                 }
-            };*/
+            };
 
-
+            //  Use this JSON data if Firebase not responding
             /*      loadForm(data);
              */
 
 
 
-            /*     Comment this out if Firebase not responding
-             */
-            var ref = new Firebase("https://eec.firebaseio.com/");
-            ref.authAnonymously(function(error, authData) {
-                if (error) {
-                    console.log("Login Failed!", error);
-                } else {
-                    console.log("Authenticated successfully with payload:", authData);
-                }
-            });
 
-            // download the data into a local object
-            vm.data = $firebaseObject(ref);
-
-
-
-            //this waits for the data to load and then logs the output. 
-            vm.data.$loaded()
-                .then(function() {
-                    usSpinnerService.stop('spinner-1');
-                    loadForm(vm.data);
-                })
-                .catch(function(err) {
-                    console.error(err);
-                });
-
-            /* up until here
-             */
-
-            function loadForm(data) {
-                //how fields can communicate with one another
-                vm.options = {
-                    formState: {
-                        language: 'en'                        
-                    }
-                };
-
-                console.log(vm.options.formState);
-                vm.enclosureFields = [{
-                    key: 'language',
-                    model: vm.options.formState,
-                    type: 'selectLanguage',
-                    templateOptions: {
-                        label: $translate.instant('LANGUAGE'),
-                        options: [{
-                            "name": $translate.instant('ENGLISH'),
-                            "value": "en"
-                        }, {
-                            "name": $translate.instant('DEUTSCH'),
-                            "value": "de"
-                        }, ],
-                        onChange: function(val) {
-                            $translate.use(val);                            
-                        }
-                    },
-                    //adds dynamic interaction to form, use for hiding fields based on other fields
-                    expressionProperties: {
-                        'templateOptions.label': '"LANGUAGE" | translate',
-                        'templateOptions.options[0].name': '"ENGLISH" | translate',
-                        'templateOptions.options[1].name': '"DEUTSCH" | translate'
-                    }
-
-
-                }, {
-                    template: '<h1 style="color: #0080FF">Enclosure</h1>'
-
-                }, {
-                    key: 'width',
-                    type: 'rangeSlider',
-                    templateOptions: {
-                        label: $translate.instant('WIDTH')
-                    },
-                    expressionProperties: {
-                        'templateOptions.label': '"WIDTH" | translate'
-                    }
-                }, {
-                    key: 'enclosure',
-                    type: 'selectEnclosure',
-                    templateOptions: {
-                        type: 'selectEnclosure',
-                        label: $translate.instant('ENCLOSURE'),
-                        options: data.enclosures,
-                        
-                    },
-                    expressionProperties: {
-                        'templateOptions.label': '"ENCLOSURE" | translate'
-                    }
-                }, {
-                    key: 'colors',
-                    type: 'selectColors',
-                    templateOptions: {
-                        label: $translate.instant('COLOR'),
-                        options: [{
-                            "name": $translate.instant('YELLOW'),
-                            "value": "789"
-                        }, {
-                            "name": $translate.instant('GREEN'),
-                            "value": "1234"
-                        }, {
-                            "name": $translate.instant('RED'),
-                            "value": "5678"
-                        }, ]
-                    },
-                    expressionProperties: {
-                        'templateOptions.label': '"COLOR" | translate',
-                        'templateOptions.options[0].name': '"YELLOW" | translate',
-                        'templateOptions.options[1].name': '"GREEN" | translate',
-                        'templateOptions.options[2].name': '"RED" | translate'
-
-                    }
-
-                }, ];
-
-
-
-            }
 
 
 

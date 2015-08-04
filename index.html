@@ -14,10 +14,9 @@
         <form novalidate>
             <span us-spinner spinner-key="spinner-1" spinner-start-active="true">
             </span>
-            <formly-form fields="vm.enclosureFields" form="vm.enclosureForm" model="vm.model" options="vm.options">                       
+            <formly-form fields="vm.enclosureFields" form="vm.enclosureForm" model="vm.model">
             </formly-form>
         </form>
-        
     </div>
     <!-- my custom templates here -->
     <script type="text/ng-template" id="custom-select-language.html">
@@ -26,13 +25,14 @@
                 {{options.templateOptions.label}}
             </label>
             <select class="form-control" ng-model="model[options.key]" ng-options="option.value as option.name group by option.group for option in options.templateOptions.options">
+                <pre ng-repeat="(key, val) in this">$scope.{{key}} = {{ val | json }}</pre>
             </select>
         </div>
         <br>
         <br>
     </script>
     <script type="text/ng-template" id="custom-select-enclosure.html">
-        <div class="form-inline" id="fields">      
+        <div class="form-inline" id="fields">
             <label for="{{id}}">
                 {{options.templateOptions.label}}
             </label>

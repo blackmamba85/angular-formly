@@ -5,16 +5,14 @@
     'use strict';
 
     var app = angular.module('formlyApp', ['formly',
-
         'firebase',
-        'formlyIonic',
         'pascalprecht.translate',
         'angularAwesomeSlider',
         'ngSanitize',
         'angularSpinner',
     ]);
 
-    //Custom templates configurationsS
+    //registering types for Custom templates 
     app.run(function(formlyConfig) {
         formlyConfig.setType({
             name: 'selectLanguage',
